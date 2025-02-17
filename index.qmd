@@ -10,7 +10,6 @@ Often I will start with a simple `summary` function to get a feel for the data s
 
 ```{r simple-code}
 summary(iris)
-
 ```
 
 Here we can see that there are five features (columns). The "big five" statistics are featured: minimum value, 1st quartile value, median value, mean value, 3rd quartile value, maximum value.
