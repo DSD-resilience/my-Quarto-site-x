@@ -1,2 +1,0 @@
-[1,"==> quarto preview index.qmd --to html --no-watch-inputs --no-browse\n\n"]
-[1,"ERROR: YAMLException: duplicated mapping key (C:\\Users\\datas\\OneDrive\\Documents\\R\\Websites\\my-quarto-site-x\\_quarto.yml, 20:1)\n20: project:\n   ~~\n21:   type: website\n"]
