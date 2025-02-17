@@ -2,15 +2,15 @@
 title: "The Iris Dataset"
 ---
 
-This is my experimental Quarto website.
+This is my exploratory data analysis of the iris dataset.
 
-I learned about Quarto websites by visiting <https://quarto.org/docs/websites>.
+You can learn more about the iris data set by visiting [here](https://gist.github.com/curran/a08a1080b88344b0c8a7 "A GitHub repository."){.uri}.
 
-This is simple R code that I have embedded in the website:
+Often I will start with a simple `summary` function to get a feel for the data set:
 
 ```{r simple-code}
 summary(iris)
 
 ```
 
-I want to work up to being able to embed Shiny apps in order to test them.
+Here we can see that there are 150 observations (rows) and several features (columns).
