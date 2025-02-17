@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "my-quarto-site-x",
+    "section": "",
+    "text": "This is my experimental Quarto website.\nI learned about Quarto websites by visiting https://quarto.org/docs/websites.\nThis is Shiny app code that I have embedded in the website:\n\n2+2\n\n[1] 4"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  }
+]
