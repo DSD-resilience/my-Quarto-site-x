@@ -1,0 +1,6 @@
+---
+title: "Shiny Apps"
+server: shiny
+---
+
+There will be Shiny apps here.
