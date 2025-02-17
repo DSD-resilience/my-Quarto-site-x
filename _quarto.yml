@@ -9,8 +9,9 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - Shiny Apps.qmd
-
+      - href: Shiny Apps.qmd
+        text: Shiny Apps
+      
 format:
   html:
     theme: minty
