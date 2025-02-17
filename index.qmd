@@ -6,9 +6,11 @@ This is my experimental Quarto website.
 
 I learned about Quarto websites by visiting <https://quarto.org/docs/websites>.
 
-This is Shiny app code that I have embedded in the website:
+This is simple R code that I have embedded in the website:
 
 ```{r simple-code}
 summary(iris)
 
 ```
+
+I want to work up to being able to embed Shiny apps in order to test them.
