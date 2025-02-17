@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "My Portolio"
+  title: "my-quarto-site-x"
   navbar:
     left:
       - href: index.qmd

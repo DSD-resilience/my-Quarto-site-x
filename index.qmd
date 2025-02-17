@@ -1,5 +1,5 @@
 ---
-title: "my-quarto-site-x"
+title: "My Portfolio"
 ---
 
 This is my experimental Quarto website.
