@@ -1,5 +1,0 @@
----
-title: "Shiny Apps"
----
-
-Screen shots of Shiny apps will be here but it is still to be determined when/how they will be interactive.
