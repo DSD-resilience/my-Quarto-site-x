@@ -2,8 +2,6 @@
 title: "About"
 ---
 
-##About John
-
 -   Hi, I’m JT, I am a developer that lives in Baltimore, Maryland, USA.
 
 -   👀 I’m interested in Shiny apps, statistics, AI-ML, and cyber resiliency.
