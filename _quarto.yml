@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "my-quarto-site-x"
+  title: "John T. Miller"
   navbar:
     left:
       - href: index.qmd
