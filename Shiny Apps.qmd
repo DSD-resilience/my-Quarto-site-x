@@ -1,6 +1,5 @@
 ---
 title: "Shiny Apps"
-server: shiny
 ---
 
-There will be Shiny apps here.
+Screen shots of Shiny apps will be here but it is still to be determined when/how they will be interactive.
