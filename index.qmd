@@ -19,3 +19,10 @@ This is helpful, but how many observations (rows) do we have?
 ```{r row-numbers}
 row(iris)
 ```
+
+What is the mean petal length for all species of iris?
+
+```{R mean-petal-length}
+mean_petal_length <- mean(iris$Petal.Length)
+mean_petal_length
+```
