@@ -14,10 +14,10 @@ summary(iris)
 
 Here we can see that there are five features (columns). The "big five" statistics are featured: minimum value, 1st quartile value, median value, mean value, 3rd quartile value, maximum value.
 
-This is helpful, but how many observations (rows) do we have?
+This is helpful, but how many observations (rows) and features (columns) do we have?
 
 ```{r row-numbers}
-row(iris)
+dim(iris)
 ```
 
 What is the mean petal length for all species of iris?
