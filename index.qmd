@@ -2,7 +2,7 @@
 title: "The Iris Dataset"
 ---
 
-This is my exploratory data analysis of the iris dataset.
+This is my exploratory data analysis of the iris data set.
 
 You can learn more about the iris data set by visiting [here](https://gist.github.com/curran/a08a1080b88344b0c8a7 "A GitHub repository."){.uri}.
 
@@ -26,3 +26,7 @@ What is the mean petal length for all species of iris?
 mean_petal_length <- mean(iris$Petal.Length)
 mean_petal_length
 ```
+
+What is the mean sepal length for all species of iris?
+
+`mean_sepal_length <- mean(iris$Sepal.Length)`
