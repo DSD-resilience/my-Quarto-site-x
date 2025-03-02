@@ -2,31 +2,141 @@
 title: "The Iris Dataset"
 ---
 
-This is my exploratory data analysis of the iris data set.
+This is an exploratory data analysis of the iris data set.
 
 You can learn more about the iris data set by visiting [here](https://gist.github.com/curran/a08a1080b88344b0c8a7 "A GitHub repository."){.uri}.
 
-Often I will start with a simple `summary` function to get a feel for the data set:
+```{R EDA}
+# Load necessary libraries
+library(datasets)
+library(ggplot2)
+library(dplyr)
+library(GGally)
 
-```{r simple-code}
+# Load the Iris dataset
+data(iris)
+
+# 1. Basic Exploration
+
+# First few rows
+head(iris)
+
+# Structure of the dataset
+str(iris)
+
+# Summary statistics
 summary(iris)
+
+# Class distribution
+table(iris$Species)
+
+# Check for missing values
+sum(is.na(iris))
+
+# 2. Visualizations
+
+# Pairplot to visualize relationships between features
+ggpairs(iris, aes(color = Species)) +
+  ggtitle("Pairplot of Iris Dataset")
+
+# Boxplots to visualize feature distributions by species
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  ggtitle("Sepal Length by Species")
+
+ggplot(iris, aes(x = Species, y = Sepal.Width, fill = Species)) +
+  geom_boxplot() +
+  ggtitle("Sepal Width by Species")
+
+ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
+  geom_boxplot() +
+  ggtitle("Petal Length by Species")
+
+ggplot(iris, aes(x = Species, y = Petal.Width, fill = Species)) +
+  geom_boxplot() +
+  ggtitle("Petal Width by Species")
+
+# Histograms to visualize feature distributions
+ggplot(iris, aes(x = Sepal.Length, fill = Species)) +
+  geom_histogram(alpha = 0.5, position = "identity") +
+  ggtitle("Histogram of Sepal Length")
+
+ggplot(iris, aes(x = Sepal.Width, fill = Species)) +
+  geom_histogram(alpha = 0.5, position = "identity") +
+  ggtitle("Histogram of Sepal Width")
+
+ggplot(iris, aes(x = Petal.Length, fill = Species)) +
+  geom_histogram(alpha = 0.5, position = "identity") +
+  ggtitle("Histogram of Petal Length")
+
+ggplot(iris, aes(x = Petal.Width, fill = Species)) +
+  geom_histogram(alpha = 0.5, position = "identity") +
+  ggtitle("Histogram of Petal Width")
+
+#Violin Plots
+ggplot(iris, aes(x=Species, y=Sepal.Length, fill=Species)) + geom_violin() + ggtitle("Violin Plot of Sepal Length")
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) + geom_violin() + ggtitle("Violin Plot of Sepal Width")
+ggplot(iris, aes(x=Species, y=Petal.Length, fill=Species)) + geom_violin() + ggtitle("Violin Plot of Petal Length")
+ggplot(iris, aes(x=Species, y=Petal.Width, fill=Species)) + geom_violin() + ggtitle("Violin Plot of Petal Width")
+
+# Correlation Matrix (using cor and heatmap)
+correlation_matrix <- cor(iris[, 1:4])
+heatmap(correlation_matrix, annot = TRUE, main = "Correlation Matrix")
+
+# 3. Further Analysis (Optional)
+
+# Outlier Detection (e.g., using boxplots or scatter plots)
+# Feature Engineering (if needed)
+# Statistical tests (e.g., ANOVA)
+# Example ANOVA
+anova_sepal_length <- aov(Sepal.Length ~ Species, data = iris)
+summary(anova_sepal_length) #Shows if there are significant differences between species for Sepal Length.
 ```
 
-Here we can see that there are five features (columns). The "big five" statistics are featured: minimum value, 1st quartile value, median value, mean value, 3rd quartile value, maximum value.
+**Explanation:**
 
-This is helpful, but how many observations (rows) and features (columns) do we have?
+**Loading and Initial Inspection:**
 
-```{r row-numbers}
-dim(iris)
-```
+-   Loads the `datasets`, `ggplot2`, `dplyr`, and `GGally` libraries.
 
-What is the mean petal length for all species of iris?
+-   Loads the Iris dataset using `data(iris)`.
 
-```{R mean-petal-length}
-mean_petal_length <- mean(iris$Petal.Length)
-mean_petal_length
-```
+-   Uses `head()`, `str()`, `summary()`, and `table()` to explore the data's structure, summary statistics, and class distribution.
 
-What is the mean sepal length for all species of iris?
+-   Checks for missing values using `sum(is.na(iris))`.
 
-`mean_sepal_length <- mean(iris$Sepal.Length)`
+**Visualizations:**
+
+-   **Pairplot:** Uses `ggpairs()` from the `GGally` package to create a pairplot, showing scatter plots for all pairs of features, colored by species.
+
+-   **Boxplots:** Uses `ggplot2` to create boxplots for each feature, grouped by species.
+
+-   **Histograms:** Uses `ggplot2` to create histograms for each feature, colored by species.
+
+-   **Violin Plots:** Uses `ggplot2` to create violin plots showing distributions and density.
+
+-   **Correlation Matrix:** Calculates the correlation matrix using `cor()` and visualizes it using `heatmap()`.
+
+**Further Analysis (Optional):**
+
+-   **Outlier Detection:** You could use boxplots or scatter plots to identify outliers.
+
+-   **Feature Engineering:** If needed, you could create new features based on existing ones.
+
+-   **Statistical Tests:** Performs an ANOVA test on `Sepal.Length` to illustrate how to check for significant differences between species.
+
+**Key Observations:**
+
+-   The Iris dataset is clean, with no missing values.
+
+-   Petal length and petal width are highly correlated and are excellent features for separating species.
+
+-   Setosa is easily separable from versicolor and virginica, while versicolor and virginica are more challenging to distinguish.
+
+-   The correlation matrix shows that petal length and petal width are highly correlated.
+
+-   The boxplots and violin plots show the distributions of each feature for each species.
+
+-   The pairplot shows the relationships between all the features.
+
+-   ANOVA can be used to statistically check for differences between the species.
