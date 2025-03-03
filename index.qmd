@@ -8,6 +8,7 @@ You can learn more about the iris data set by visiting [here](https://gist.githu
 
 ```{R EDA}
 #| warning: false
+#| message: false
 # Load necessary libraries
 library(datasets)
 library(ggplot2)
