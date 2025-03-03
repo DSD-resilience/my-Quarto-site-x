@@ -170,11 +170,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This is my exploratory data analysis of the iris data set.</p>
+<p>This is an exploratory data analysis of the iris data set.</p>
 <p>You can learn more about the iris data set by visiting <a href="https://gist.github.com/curran/a08a1080b88344b0c8a7" class="uri" title="A GitHub repository.">here</a>.</p>
-<p>Often I will start with a simple <code>summary</code> function to get a feel for the data set:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasets)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'GGally':
+  method from   
+  +.gg   ggplot2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the Iris dataset</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Basic Exploration</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># First few rows</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Structure of the dataset</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   150 obs. of  5 variables:
+ $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+ $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+ $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+ $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+ $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
@@ -191,175 +241,232 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                 
                 </code></pre>
 </div>
-</div>
-<p>Here we can see that there are five features (columns). The “big five” statistics are featured: minimum value, 1st quartile value, median value, mean value, 3rd quartile value, maximum value.</p>
-<p>This is helpful, but how many observations (rows) do we have?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">row</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Class distribution</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(iris<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       [,1] [,2] [,3] [,4] [,5]
-  [1,]    1    1    1    1    1
-  [2,]    2    2    2    2    2
-  [3,]    3    3    3    3    3
-  [4,]    4    4    4    4    4
-  [5,]    5    5    5    5    5
-  [6,]    6    6    6    6    6
-  [7,]    7    7    7    7    7
-  [8,]    8    8    8    8    8
-  [9,]    9    9    9    9    9
- [10,]   10   10   10   10   10
- [11,]   11   11   11   11   11
- [12,]   12   12   12   12   12
- [13,]   13   13   13   13   13
- [14,]   14   14   14   14   14
- [15,]   15   15   15   15   15
- [16,]   16   16   16   16   16
- [17,]   17   17   17   17   17
- [18,]   18   18   18   18   18
- [19,]   19   19   19   19   19
- [20,]   20   20   20   20   20
- [21,]   21   21   21   21   21
- [22,]   22   22   22   22   22
- [23,]   23   23   23   23   23
- [24,]   24   24   24   24   24
- [25,]   25   25   25   25   25
- [26,]   26   26   26   26   26
- [27,]   27   27   27   27   27
- [28,]   28   28   28   28   28
- [29,]   29   29   29   29   29
- [30,]   30   30   30   30   30
- [31,]   31   31   31   31   31
- [32,]   32   32   32   32   32
- [33,]   33   33   33   33   33
- [34,]   34   34   34   34   34
- [35,]   35   35   35   35   35
- [36,]   36   36   36   36   36
- [37,]   37   37   37   37   37
- [38,]   38   38   38   38   38
- [39,]   39   39   39   39   39
- [40,]   40   40   40   40   40
- [41,]   41   41   41   41   41
- [42,]   42   42   42   42   42
- [43,]   43   43   43   43   43
- [44,]   44   44   44   44   44
- [45,]   45   45   45   45   45
- [46,]   46   46   46   46   46
- [47,]   47   47   47   47   47
- [48,]   48   48   48   48   48
- [49,]   49   49   49   49   49
- [50,]   50   50   50   50   50
- [51,]   51   51   51   51   51
- [52,]   52   52   52   52   52
- [53,]   53   53   53   53   53
- [54,]   54   54   54   54   54
- [55,]   55   55   55   55   55
- [56,]   56   56   56   56   56
- [57,]   57   57   57   57   57
- [58,]   58   58   58   58   58
- [59,]   59   59   59   59   59
- [60,]   60   60   60   60   60
- [61,]   61   61   61   61   61
- [62,]   62   62   62   62   62
- [63,]   63   63   63   63   63
- [64,]   64   64   64   64   64
- [65,]   65   65   65   65   65
- [66,]   66   66   66   66   66
- [67,]   67   67   67   67   67
- [68,]   68   68   68   68   68
- [69,]   69   69   69   69   69
- [70,]   70   70   70   70   70
- [71,]   71   71   71   71   71
- [72,]   72   72   72   72   72
- [73,]   73   73   73   73   73
- [74,]   74   74   74   74   74
- [75,]   75   75   75   75   75
- [76,]   76   76   76   76   76
- [77,]   77   77   77   77   77
- [78,]   78   78   78   78   78
- [79,]   79   79   79   79   79
- [80,]   80   80   80   80   80
- [81,]   81   81   81   81   81
- [82,]   82   82   82   82   82
- [83,]   83   83   83   83   83
- [84,]   84   84   84   84   84
- [85,]   85   85   85   85   85
- [86,]   86   86   86   86   86
- [87,]   87   87   87   87   87
- [88,]   88   88   88   88   88
- [89,]   89   89   89   89   89
- [90,]   90   90   90   90   90
- [91,]   91   91   91   91   91
- [92,]   92   92   92   92   92
- [93,]   93   93   93   93   93
- [94,]   94   94   94   94   94
- [95,]   95   95   95   95   95
- [96,]   96   96   96   96   96
- [97,]   97   97   97   97   97
- [98,]   98   98   98   98   98
- [99,]   99   99   99   99   99
-[100,]  100  100  100  100  100
-[101,]  101  101  101  101  101
-[102,]  102  102  102  102  102
-[103,]  103  103  103  103  103
-[104,]  104  104  104  104  104
-[105,]  105  105  105  105  105
-[106,]  106  106  106  106  106
-[107,]  107  107  107  107  107
-[108,]  108  108  108  108  108
-[109,]  109  109  109  109  109
-[110,]  110  110  110  110  110
-[111,]  111  111  111  111  111
-[112,]  112  112  112  112  112
-[113,]  113  113  113  113  113
-[114,]  114  114  114  114  114
-[115,]  115  115  115  115  115
-[116,]  116  116  116  116  116
-[117,]  117  117  117  117  117
-[118,]  118  118  118  118  118
-[119,]  119  119  119  119  119
-[120,]  120  120  120  120  120
-[121,]  121  121  121  121  121
-[122,]  122  122  122  122  122
-[123,]  123  123  123  123  123
-[124,]  124  124  124  124  124
-[125,]  125  125  125  125  125
-[126,]  126  126  126  126  126
-[127,]  127  127  127  127  127
-[128,]  128  128  128  128  128
-[129,]  129  129  129  129  129
-[130,]  130  130  130  130  130
-[131,]  131  131  131  131  131
-[132,]  132  132  132  132  132
-[133,]  133  133  133  133  133
-[134,]  134  134  134  134  134
-[135,]  135  135  135  135  135
-[136,]  136  136  136  136  136
-[137,]  137  137  137  137  137
-[138,]  138  138  138  138  138
-[139,]  139  139  139  139  139
-[140,]  140  140  140  140  140
-[141,]  141  141  141  141  141
-[142,]  142  142  142  142  142
-[143,]  143  143  143  143  143
-[144,]  144  144  144  144  144
-[145,]  145  145  145  145  145
-[146,]  146  146  146  146  146
-[147,]  147  147  147  147  147
-[148,]  148  148  148  148  148
-[149,]  149  149  149  149  149
-[150,]  150  150  150  150  150</code></pre>
+<pre><code>
+    setosa versicolor  virginica 
+        50         50         50 </code></pre>
 </div>
-</div>
-<p>What is the mean petal length for all species of iris?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mean_petal_length <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris<span class="sc">$</span>Petal.Length)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mean_petal_length</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(iris))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.758</code></pre>
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Visualizations</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairplot to visualize relationships between features</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(iris, <span class="fu">aes</span>(<span class="at">color =</span> Species)) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Pairplot of Iris Dataset"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<p>What is the mean sepal length for all species of iris?</p>
-<p><code>mean_sepal_length &lt;- mean(iris$Sepal.Length)</code></p>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplots to visualize feature distributions by species</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Sepal.Length, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Sepal Length by Species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Sepal.Width, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Sepal Width by Species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Petal.Length, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Petal Length by Species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Petal.Width, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Petal Width by Species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograms to visualize feature distributions</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Histogram of Sepal Length"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Width, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Histogram of Sepal Width"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Histogram of Petal Length"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Petal.Width, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Histogram of Petal Width"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-9.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Violin Plots</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Sepal.Length, <span class="at">fill=</span>Species)) <span class="sc">+</span> <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Violin Plot of Sepal Length"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-10.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Sepal.Width, <span class="at">fill=</span>Species)) <span class="sc">+</span> <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Violin Plot of Sepal Width"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-11.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species)) <span class="sc">+</span> <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Violin Plot of Petal Length"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-12.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Width, <span class="at">fill=</span>Species)) <span class="sc">+</span> <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Violin Plot of Petal Width"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-13.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation Matrix (using cor and heatmap)</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap</span>(correlation_matrix, <span class="at">annot =</span> <span class="cn">TRUE</span>, <span class="at">main =</span> <span class="st">"Correlation Matrix"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in plot.window(...): "annot" is not a graphical parameter</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in plot.xy(xy, type, ...): "annot" is not a graphical parameter</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in title(...): "annot" is not a graphical parameter</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/EDA-14.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Further Analysis (Optional)</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Outlier Detection (e.g., using boxplots or scatter plots)</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature Engineering (if needed)</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical tests (e.g., ANOVA)</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Example ANOVA</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>anova_sepal_length <span class="ot">&lt;-</span> <span class="fu">aov</span>(Sepal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_sepal_length) <span class="co">#Shows if there are significant differences between species for Sepal Length.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Df Sum Sq Mean Sq F value Pr(&gt;F)    
+Species       2  63.21  31.606   119.3 &lt;2e-16 ***
+Residuals   147  38.96   0.265                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p><strong>Explanation:</strong></p>
+<p><strong>Loading and Initial Inspection:</strong></p>
+<ul>
+<li><p>Loads the <code>datasets</code>, <code>ggplot2</code>, <code>dplyr</code>, and <code>GGally</code> libraries.</p></li>
+<li><p>Loads the Iris dataset using <code>data(iris)</code>.</p></li>
+<li><p>Uses <code>head()</code>, <code>str()</code>, <code>summary()</code>, and <code>table()</code> to explore the data’s structure, summary statistics, and class distribution.</p></li>
+<li><p>Checks for missing values using <code>sum(is.na(iris))</code>.</p></li>
+</ul>
+<p><strong>Visualizations:</strong></p>
+<ul>
+<li><p><strong>Pairplot:</strong> Uses <code>ggpairs()</code> from the <code>GGally</code> package to create a pairplot, showing scatter plots for all pairs of features, colored by species.</p></li>
+<li><p><strong>Boxplots:</strong> Uses <code>ggplot2</code> to create boxplots for each feature, grouped by species.</p></li>
+<li><p><strong>Histograms:</strong> Uses <code>ggplot2</code> to create histograms for each feature, colored by species.</p></li>
+<li><p><strong>Violin Plots:</strong> Uses <code>ggplot2</code> to create violin plots showing distributions and density.</p></li>
+<li><p><strong>Correlation Matrix:</strong> Calculates the correlation matrix using <code>cor()</code> and visualizes it using <code>heatmap()</code>.</p></li>
+</ul>
+<p><strong>Further Analysis (Optional):</strong></p>
+<ul>
+<li><p><strong>Outlier Detection:</strong> You could use boxplots or scatter plots to identify outliers.</p></li>
+<li><p><strong>Feature Engineering:</strong> If needed, you could create new features based on existing ones.</p></li>
+<li><p><strong>Statistical Tests:</strong> Performs an ANOVA test on <code>Sepal.Length</code> to illustrate how to check for significant differences between species.</p></li>
+</ul>
+<p><strong>Key Observations:</strong></p>
+<ul>
+<li><p>The Iris dataset is clean, with no missing values.</p></li>
+<li><p>Petal length and petal width are highly correlated and are excellent features for separating species.</p></li>
+<li><p>Setosa is easily separable from versicolor and virginica, while versicolor and virginica are more challenging to distinguish.</p></li>
+<li><p>The correlation matrix shows that petal length and petal width are highly correlated.</p></li>
+<li><p>The boxplots and violin plots show the distributions of each feature for each species.</p></li>
+<li><p>The pairplot shows the relationships between all the features.</p></li>
+<li><p>ANOVA can be used to statistically check for differences between the species.</p></li>
+</ul>
 
 
 
