@@ -7,6 +7,7 @@ This is an exploratory data analysis of the iris data set.
 You can learn more about the iris data set by visiting [here](https://gist.github.com/curran/a08a1080b88344b0c8a7 "A GitHub repository."){.uri}.
 
 ```{R EDA}
+#| warning: false
 # Load necessary libraries
 library(datasets)
 library(ggplot2)
